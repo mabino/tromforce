@@ -22,7 +22,7 @@ The app currently displays only the first five calls: Zelda's Lullaby, Epona's S
 
 The image generates all twelve scores and listening assets during its build. No bind mounts, package installation, accounts, external fonts or runtime internet connection are needed. The server runs as a non-root user, with a read-only container filesystem. The initial image build needs access to pull the Python base image. Host port 8080 is published on all interfaces by default; bind `127.0.0.1:8080:8080` in Compose if you only want local access.
 
-Features include song selection, enlarged SVG notation, a fullscreen practice view, pitch-preserving tempo adjustment, note highlighting, pause/resume, volume, and looping with a silent bar for breathing. **Space** plays/pauses, **left/right arrows** change calls, and **F** toggles fullscreen when focus is outside a control. **Escape** exits fullscreen. If browser fullscreen is unavailable, the button opens a focused reading layout. Increase Score size to enlarge notation; it scrolls horizontally and follows the highlighted note when necessary. Song selection, score size, volume and loop preference persist in that browser. Tempo changes restart the call.
+Features include song selection, key selection (D default, B♭, C, E♭, F, G, A), enlarged SVG notation with accidentals, a fullscreen practice view, pitch-preserving tempo adjustment, note highlighting, pause/resume, volume, and looping with a silent bar for breathing. **Space** plays/pauses, **left/right arrows** change calls, and **F** toggles fullscreen when focus is outside a control. **Escape** exits fullscreen. If browser fullscreen is unavailable, the button opens a focused reading layout. Increase Score size to enlarge notation; it scrolls horizontally and follows the highlighted note when necessary. Song selection, key selection, score size, volume and loop preference persist in that browser. Tempo changes restart the call.
 
 For native fullscreen, use localhost or serve the app over HTTPS; browser permissions, embedded frames and some mobile browsers may restrict the Fullscreen API. Audio starts only after pressing Play. The app also provides WAV, MusicXML and PDF downloads, and works at a URL subpath when that path ends in `/`.
 
@@ -53,7 +53,7 @@ Run `python3 generate_booklet.py`. Python 3.9+; no third-party packages or netwo
 
 ## Editorial choices and sources
 
-Pitch orders were checked against [Play Ocarina's twelve-song index](https://playocarina.com/songs/ocarina-of-time/), accessed November 8, 2026. The five relative pitches D, F, A, B, high D become D3, F3, A3, B3, D4. Pitch names under the staff identify octaves; C4 is middle C.
+Pitch orders were checked against [Play Ocarina's twelve-song index](https://playocarina.com/songs/ocarina-of-time/), accessed November 8, 2026. The five relative pitches D, F, A, B, high D become D3, F3, A3, B3, D4; C4 is middle C.
 
 Rhythms, meters, dynamics, tempos and practice instructions are editorial suggestions for this short-call edition, not a note-for-note transcription of soundtrack timing. Each call occupies two complete measures. The MIDI and MusicXML follow these editorial settings. Scarecrow's Song is omitted because the player invents its melody.
 

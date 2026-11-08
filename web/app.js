@@ -1,18 +1,75 @@
 import {timeline, remainingEvents, activeNote} from './core.mjs';
 
 const $ = id => document.getElementById(id);
+const KEYS = {
+  D: {
+    label: 'D', range: 'D3–D4',
+    slide: 'D3 fourth, F3 first, A3 second, B3 fourth, D4 first',
+    notes: {D3:{step:4,acc:'',midi:50}, F3:{step:6,acc:'',midi:53}, A3:{step:8,acc:'',midi:57}, B3:{step:9,acc:'',midi:59}, D4:{step:11,acc:'',midi:62}}
+  },
+  Bb: {
+    label: 'B♭', range: 'B♭2–B♭3',
+    slide: 'B♭2 first, D♭3 fifth, F3 first, G3 fourth, B♭3 first',
+    notes: {D3:{step:2,acc:'♭',midi:46}, F3:{step:4,acc:'♭',midi:49}, A3:{step:6,acc:'',midi:53}, B3:{step:7,acc:'',midi:55}, D4:{step:9,acc:'♭',midi:58}}
+  },
+  C: {
+    label: 'C', range: 'C3–C4',
+    slide: 'C3 sixth, E♭3 third, G3 fourth, A3 second, C4 third',
+    notes: {D3:{step:3,acc:'',midi:48}, F3:{step:5,acc:'♭',midi:51}, A3:{step:7,acc:'',midi:55}, B3:{step:8,acc:'',midi:57}, D4:{step:10,acc:'',midi:60}}
+  },
+  Eb: {
+    label: 'E♭', range: 'E♭3–E♭4',
+    slide: 'E♭3 third, G♭3 fifth, B♭3 first, C4 third, E♭4 third',
+    notes: {D3:{step:5,acc:'♭',midi:51}, F3:{step:7,acc:'♭',midi:54}, A3:{step:9,acc:'♭',midi:58}, B3:{step:10,acc:'',midi:60}, D4:{step:12,acc:'♭',midi:63}}
+  },
+  F: {
+    label: 'F', range: 'F2–F3',
+    slide: 'F2 first, A♭2 third, C3 sixth, D3 fourth, F3 first',
+    notes: {D3:{step:-1,acc:'',midi:41}, F3:{step:1,acc:'♭',midi:44}, A3:{step:3,acc:'',midi:48}, B3:{step:4,acc:'',midi:50}, D4:{step:6,acc:'',midi:53}}
+  },
+  G: {
+    label: 'G', range: 'G2–G3',
+    slide: 'G2 fourth, B♭2 first, D3 fourth, E3 second, G3 fourth',
+    notes: {D3:{step:0,acc:'',midi:43}, F3:{step:2,acc:'♭',midi:46}, A3:{step:4,acc:'',midi:50}, B3:{step:5,acc:'',midi:52}, D4:{step:7,acc:'',midi:55}}
+  },
+  A: {
+    label: 'A', range: 'A2–A3',
+    slide: 'A2 second, C3 sixth, E3 second, F♯3 fifth, A3 second',
+    notes: {D3:{step:1,acc:'',midi:45}, F3:{step:3,acc:'',midi:48}, A3:{step:5,acc:'',midi:52}, B3:{step:6,acc:'♯',midi:54}, D4:{step:8,acc:'',midi:57}}
+  }
+};
 const pitchSteps = {D3:4, F3:6, A3:8, B3:9, D4:11};
 let songs = [], selected = 0, ctx, master, voices = [], animation;
 let playing = false, offset = 0, startTime = 0, currentNote = -1;
 let run = 0, plan, zoom = 100;
 const saved = (() => {try {return JSON.parse(localStorage.getItem('tromforce') || localStorage.getItem('ocarina-room') || '{}');} catch {return {};}})();
+let currentKey = (saved.key && KEYS[saved.key]) ? saved.key : 'D';
 const safe = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 function persist() {
-  try {localStorage.setItem('tromforce', JSON.stringify({selected, zoom, volume:$('volume').value, loop:$('loop').checked}));} catch {}
+  try {localStorage.setItem('tromforce', JSON.stringify({selected, zoom, key:currentKey, volume:$('volume').value, loop:$('loop').checked}));} catch {}
+}
+
+function updateKeyUI() {
+  const k = KEYS[currentKey] || KEYS.D;
+  if($('key-select')) $('key-select').value = currentKey;
+  if($('clef-range')) $('clef-range').textContent = k.range;
+  if($('slide-guide')) $('slide-guide').textContent = `Slide guide: ${k.slide}. Adjust by ear.`;
+}
+
+function changeKey(key) {
+  if(!KEYS[key] || key === currentKey) return;
+  currentKey = key;
+  const resume = playing;
+  reset();
+  updateKeyUI();
+  if(songs[selected]) renderScore(songs[selected]);
+  persist();
+  if(resume) play();
 }
 
 function renderScore(song) {
+  const k = KEYS[currentKey] || KEYS.D;
   const barBeats = Number(song.meter.split('/')[0]);
   const bars = [[], []];
   let beat = 0, bar = 0;
@@ -23,7 +80,7 @@ function renderScore(song) {
   });
   const viewBox=document.body.classList.contains('focus-mode')?'0 48 900 190':'0 0 900 260';
   const parts = [`<svg viewBox="${viewBox}" role="img" aria-labelledby="score-title score-desc">
-    <title id="score-title">${safe(song.title)} in bass clef</title>
+    <title id="score-title">${safe(song.title)} in bass clef (${k.label})</title>
     <desc id="score-desc">${song.meter} time. ${song.notes.map(n=>`${n.pitch}, ${n.beats} beats`).join('; ')}.</desc>
     <g stroke="#263c30" fill="#263c30" stroke-width="1.2">`];
   for(let i=0;i<5;i++) parts.push(`<path d="M25 ${160-i*12} H875"/>`);
@@ -37,14 +94,25 @@ function renderScore(song) {
     let used=0;
     notes.forEach(n => {
       const x=bx+18+330*used/weights; used+=Math.sqrt(n.beats);
-      const step=pitchSteps[n.pitch], y=160-step*6;
+      const noteInfo = k.notes[n.pitch] || {step: pitchSteps[n.pitch] || 4, acc: '', midi: n.midi};
+      const step=noteInfo.step, y=160-step*6;
       parts.push(`<g class="note" data-index="${n.index}"><ellipse class="halo" cx="${x}" cy="${y}" rx="19" ry="15"/>`);
-      for(let ledger=10;ledger<=step;ledger+=2) parts.push(`<path d="M${x-12} ${160-ledger*6} h24"/>`);
+      if(step>=10) {
+        for(let ledger=10;ledger<=step;ledger+=2) parts.push(`<path d="M${x-12} ${160-ledger*6} h24"/>`);
+      }
+      if(step<0) {
+        for(let ledger=-2;ledger>=step;ledger-=2) parts.push(`<path d="M${x-12} ${160-ledger*6} h24"/>`);
+      }
+      if(noteInfo.acc==='♭') {
+        parts.push(`<text x="${x-13}" y="${y+6}" font-size="20" font-family="Georgia,serif" font-weight="bold" stroke="none" fill="#263c30">♭</text>`);
+      } else if(noteInfo.acc==='♯') {
+        parts.push(`<text x="${x-13}" y="${y+5}" font-size="16" font-family="Georgia,serif" stroke="none" fill="#263c30">♯</text>`);
+      }
       parts.push(`<ellipse cx="${x}" cy="${y}" rx="7" ry="4.5" transform="rotate(-12 ${x} ${y})" ${n.beats===2?'fill="var(--paper)" stroke-width="1.7"':''}/>
         <path d="M${x-6} ${y+1} v43" stroke-width="1.5"/>`);
       if(n.beats===.5) parts.push(`<path d="M${x-6} ${y+44} C${x-24} ${y+37} ${x-21} ${y+28} ${x-12} ${y+20}" stroke-width="2" fill="none"/>`);
       if(n.beats===1.5) parts.push(`<circle cx="${x+14}" cy="${y-(step%2===0?6:0)}" r="1.8"/>`);
-      parts.push(`</g><text x="${x}" y="222" text-anchor="middle" font-family="system-ui" font-size="14" stroke="none" fill="#63756b">${n.pitch}</text>`);
+      parts.push('</g>');
     });
     const boundary=116+(bi+1)*374;
     parts.push(`<path d="M${boundary} 112 V160"/>`);
@@ -117,6 +185,7 @@ async function play() {
 
 function schedule(from) {
   const realStart=startTime+from;
+  const k=KEYS[currentKey] || KEYS.D;
   remainingEvents(plan.events,from).forEach(note => {
     const at=realStart+note.delay, duration=note.remaining;
     const gain=ctx.createGain(); gain.connect(master);
@@ -128,7 +197,8 @@ function schedule(from) {
     const real=new Float32Array(9), imag=new Float32Array(9);
     for(let h=1;h<=8;h++) imag[h]=1/Math.pow(h,1.5);
     osc.setPeriodicWave(ctx.createPeriodicWave(real,imag));
-    osc.frequency.value=440*2**((note.midi-69)/12);
+    const noteInfo=k.notes[note.pitch] || {midi:note.midi};
+    osc.frequency.value=440*2**((noteInfo.midi-69)/12);
     osc.connect(gain); osc.start(at); osc.stop(at+duration);
     osc.onended=()=>gain.disconnect(); voices.push(osc);
   });
@@ -188,6 +258,7 @@ $('volume').addEventListener('input',()=>{
   persist();
 });
 $('loop').addEventListener('change',persist);
+if($('key-select')) $('key-select').addEventListener('change',()=>changeKey($('key-select').value));
 document.addEventListener('keydown',event=>{
   if(['INPUT','TEXTAREA','SELECT','BUTTON','A','SUMMARY'].includes(event.target.tagName) || event.ctrlKey || event.metaKey || event.altKey) return;
   if(event.code==='Space' && songs.length) {event.preventDefault(); play();}
@@ -212,6 +283,7 @@ async function init() {
     $('zoom').value=Number.isFinite(saved.zoom)?saved.zoom:100; updateZoom();
     $('volume').value=saved.volume??60; $('volume').dispatchEvent(new Event('input'));
     $('loop').checked=Boolean(saved.loop);
+    updateKeyUI();
     choose(Number.isInteger(saved.selected) && saved.selected>=0 && saved.selected<songs.length?saved.selected:0);
     for(const id of ['play','stop','previous','next','tempo','original-tempo']) $(id).disabled=false;
   } catch(error) {

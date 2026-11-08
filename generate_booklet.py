@@ -98,7 +98,6 @@ def score(p,song,y):
    if d==.5:
     if down: p.raw(f'1.2 w {sx} {sy} m {sx-8} {sy+5} {sx-8} {sy+11} {sx-3} {sy+14} c S')
     else: p.raw(f'1.2 w {sx} {sy} m {sx+8} {sy-5} {sx+8} {sy-11} {sx+3} {sy-14} c S')
-   p.text(x-6,y-45,pitch,8)
   barx=start+(bi+1)*bw
   p.line(barx,y,barx,y+28,.6)
  p.line(end+4,y,end+4,y+28,1.8)
