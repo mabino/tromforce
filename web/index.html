@@ -7,7 +7,7 @@
   <title>Tromforce · Ocarina of Time for trombone</title>
   <link rel="icon" href="ocarina-seal.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="app.js?v=2"></script>
+  <script type="module" src="app.js?v=3"></script>
 </head>
 <body>
 <header class="topbar">
@@ -26,7 +26,7 @@
     <div class="piece-header"><div><p id="category" class="eyebrow">SOLO TROMBONE · CONCERT PITCH</p><h2 id="title">Loading the songbook…</h2><p id="mood"></p></div>
       <div class="navigation"><button id="previous" aria-label="Previous song" disabled>←</button><button id="next" aria-label="Next song" disabled>→</button></div>
     </div>
-    <div class="score-toolbar"><label for="key-select">Key <select id="key-select"><option value="D">D (Default · D3–D4)</option><option value="Bb">B♭ (B♭2–B♭3)</option><option value="C">C (C3–C4)</option><option value="Eb">E♭ (E♭3–E♭4)</option><option value="F">F (F2–F3)</option><option value="G">G (G2–G3)</option><option value="A">A (A2–A3)</option></select></label><span>Bass clef <span class="dot">·</span> <span id="clef-range">D3–D4</span></span><label for="zoom">Score size <input id="zoom" type="range" min="85" max="170" step="5" value="100"><output id="zoom-value">100%</output></label></div>
+    <div class="score-toolbar"><label for="mode-select">Mode <select id="mode-select"><option value="brief" selected>Brief call (default)</option><option value="expanded">Expanded melody</option></select></label><label for="key-select">Key <select id="key-select"><option value="D">D (Default · D3–D4)</option><option value="Bb">B♭ (B♭2–B♭3)</option><option value="C">C (C3–C4)</option><option value="Eb">E♭ (E♭3–E♭4)</option><option value="F">F (F2–F3)</option><option value="G">G (G2–G3)</option><option value="A">A (A2–A3)</option></select></label><span>Bass clef <span class="dot">·</span> <span id="clef-range">D3–D4</span></span><label for="zoom">Score size <input id="zoom" type="range" min="85" max="170" step="5" value="100"><output id="zoom-value">100%</output></label></div>
     <section class="sheet" aria-label="Musical score"><div id="score-scroll" tabindex="0" aria-label="Score; scroll horizontally at larger sizes"><div id="score"></div></div><p class="score-caption"><span id="dynamic"></span> <span id="tip"></span></p></section>
     <section class="transport" aria-label="Playback controls">
       <div class="play-row"><button id="play" class="primary" disabled>▶ Play call</button><button id="stop" disabled>■ Reset</button><label class="loop"><input id="loop" type="checkbox"> Loop</label><span id="status" role="status" aria-live="polite">Loading…</span></div>

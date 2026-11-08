@@ -3,7 +3,7 @@
 import json
 import shutil
 from pathlib import Path
-from generate_booklet import SONGS, PITCH, OUT
+from generate_booklet import SONGS, PITCH, EXPANDED_MELODIES, OUT
 
 ROOT = Path(__file__).resolve().parent
 DIST = ROOT / 'dist'
@@ -19,8 +19,10 @@ def main():
     songs = []
     for i, s in enumerate(SONGS, 1):
         stem = f'{i:02d}_' + s[0].lower().replace("'", '').replace(' ', '_')
+        exp = EXPANDED_MELODIES.get(s[0], s[4])
         songs.append(dict(id=i, title=s[0], mood=s[1], tempo=s[2], meter=s[3],
                           notes=[dict(pitch=p, midi=PITCH[p], beats=d) for p, d in s[4]],
+                          expandedNotes=[dict(pitch=p, midi=PITCH[p], beats=d) for p, d in exp],
                           dynamic=s[5], tip=s[6], audio=stem+'.wav', score=stem+'.musicxml'))
         for suffix in ['.wav', '.musicxml', '.mid']:
             shutil.copy2(OUT / (stem+suffix), assets)

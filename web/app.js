@@ -6,55 +6,108 @@ const KEYS = {
     label: 'D', range: 'D3–D4',
     slide: 'D3 fourth, F3 first, A3 second, B3 fourth, D4 first',
     sig: [],
-    notes: {D3:{step:4,acc:'',midi:50,name:'D3'}, F3:{step:6,acc:'',midi:53,name:'F3'}, A3:{step:8,acc:'',midi:57,name:'A3'}, B3:{step:9,acc:'',midi:59,name:'B3'}, D4:{step:11,acc:'',midi:62,name:'D4'}}
+    notes: {
+      C3:{step:3,acc:'',midi:48,name:'C3'}, D3:{step:4,acc:'',midi:50,name:'D3'}, E3:{step:5,acc:'',midi:52,name:'E3'},
+      F3:{step:6,acc:'',midi:53,name:'F3'}, G3:{step:7,acc:'',midi:55,name:'G3'}, A3:{step:8,acc:'',midi:57,name:'A3'},
+      B3:{step:9,acc:'',midi:59,name:'B3'}, C4:{step:10,acc:'',midi:60,name:'C4'}, D4:{step:11,acc:'',midi:62,name:'D4'},
+      E4:{step:12,acc:'',midi:64,name:'E4'}, F4:{step:13,acc:'',midi:65,name:'F4'}
+    }
   },
   Bb: {
     label: 'B♭', range: 'B♭2–B♭3',
     slide: 'B♭2 first, D♭3 fifth, F3 first, G3 fourth, B♭3 first',
     sig: [{glyph:'♭',x:78,y:153},{glyph:'♭',x:88,y:135}],
-    notes: {D3:{step:2,acc:'',midi:46,name:'B♭2'}, F3:{step:4,acc:'♭',midi:49,name:'D♭3'}, A3:{step:6,acc:'',midi:53,name:'F3'}, B3:{step:7,acc:'',midi:55,name:'G3'}, D4:{step:9,acc:'',midi:58,name:'B♭3'}}
+    notes: {
+      C3:{step:1,acc:'♭',midi:44,name:'A♭2'}, D3:{step:2,acc:'',midi:46,name:'B♭2'}, E3:{step:3,acc:'',midi:48,name:'C3'},
+      F3:{step:4,acc:'♭',midi:49,name:'D♭3'}, G3:{step:5,acc:'',midi:51,name:'E♭3'}, A3:{step:6,acc:'',midi:53,name:'F3'},
+      B3:{step:7,acc:'',midi:55,name:'G3'}, C4:{step:8,acc:'♭',midi:56,name:'A♭3'}, D4:{step:9,acc:'',midi:58,name:'B♭3'},
+      E4:{step:10,acc:'',midi:60,name:'C4'}, F4:{step:11,acc:'♭',midi:61,name:'D♭4'}
+    }
   },
   C: {
     label: 'C', range: 'C3–C4',
     slide: 'C3 sixth, E♭3 third, G3 fourth, A3 second, C4 third',
     sig: [{glyph:'♭',x:78,y:153},{glyph:'♭',x:88,y:135}],
-    notes: {D3:{step:3,acc:'',midi:48,name:'C3'}, F3:{step:5,acc:'',midi:51,name:'E♭3'}, A3:{step:7,acc:'',midi:55,name:'G3'}, B3:{step:8,acc:'',midi:57,name:'A3'}, D4:{step:10,acc:'',midi:60,name:'C4'}}
+    notes: {
+      C3:{step:2,acc:'',midi:46,name:'B♭2'}, D3:{step:3,acc:'',midi:48,name:'C3'}, E3:{step:4,acc:'',midi:50,name:'D3'},
+      F3:{step:5,acc:'',midi:51,name:'E♭3'}, G3:{step:6,acc:'',midi:53,name:'F3'}, A3:{step:7,acc:'',midi:55,name:'G3'},
+      B3:{step:8,acc:'',midi:57,name:'A3'}, C4:{step:9,acc:'',midi:58,name:'B♭3'}, D4:{step:10,acc:'',midi:60,name:'C4'},
+      E4:{step:11,acc:'',midi:62,name:'D4'}, F4:{step:12,acc:'',midi:63,name:'E♭4'}
+    }
   },
   Eb: {
     label: 'E♭', range: 'E♭3–E♭4',
     slide: 'E♭3 third, G♭3 fifth, B♭3 first, C4 third, E♭4 third',
     sig: [{glyph:'♭',x:77,y:153},{glyph:'♭',x:86,y:135},{glyph:'♭',x:95,y:117}],
-    notes: {D3:{step:5,acc:'',midi:51,name:'E♭3'}, F3:{step:7,acc:'♭',midi:54,name:'G♭3'}, A3:{step:9,acc:'',midi:58,name:'B♭3'}, B3:{step:10,acc:'',midi:60,name:'C4'}, D4:{step:12,acc:'',midi:63,name:'E♭4'}}
+    notes: {
+      C3:{step:4,acc:'♭',midi:49,name:'D♭3'}, D3:{step:5,acc:'',midi:51,name:'E♭3'}, E3:{step:6,acc:'',midi:53,name:'F3'},
+      F3:{step:7,acc:'♭',midi:54,name:'G♭3'}, G3:{step:8,acc:'',midi:56,name:'A♭3'}, A3:{step:9,acc:'',midi:58,name:'B♭3'},
+      B3:{step:10,acc:'',midi:60,name:'C4'}, C4:{step:11,acc:'♭',midi:61,name:'D♭4'}, D4:{step:12,acc:'',midi:63,name:'E♭4'},
+      E4:{step:13,acc:'',midi:65,name:'F4'}, F4:{step:14,acc:'♭',midi:66,name:'G♭4'}
+    }
   },
   F: {
     label: 'F', range: 'F2–F3',
     slide: 'F2 first, A♭2 third, C3 sixth, D3 fourth, F3 first',
     sig: [{glyph:'♭',x:78,y:153}],
-    notes: {D3:{step:-1,acc:'',midi:41,name:'F2'}, F3:{step:1,acc:'♭',midi:44,name:'A♭2'}, A3:{step:3,acc:'',midi:48,name:'C3'}, B3:{step:4,acc:'',midi:50,name:'D3'}, D4:{step:6,acc:'',midi:53,name:'F3'}}
+    notes: {
+      C3:{step:-2,acc:'♭',midi:39,name:'E♭2'}, D3:{step:-1,acc:'',midi:41,name:'F2'}, E3:{step:0,acc:'',midi:43,name:'G2'},
+      F3:{step:1,acc:'♭',midi:44,name:'A♭2'}, G3:{step:2,acc:'',midi:46,name:'B♭2'}, A3:{step:3,acc:'',midi:48,name:'C3'},
+      B3:{step:4,acc:'',midi:50,name:'D3'}, C4:{step:5,acc:'♭',midi:51,name:'E♭3'}, D4:{step:6,acc:'',midi:53,name:'F3'},
+      E4:{step:7,acc:'',midi:55,name:'G3'}, F4:{step:8,acc:'♭',midi:56,name:'A♭3'}
+    }
   },
   G: {
     label: 'G', range: 'G2–G3',
     slide: 'G2 fourth, B♭2 first, D3 fourth, E3 second, G3 fourth',
     sig: [{glyph:'♭',x:78,y:153}],
-    notes: {D3:{step:0,acc:'',midi:43,name:'G2'}, F3:{step:2,acc:'',midi:46,name:'B♭2'}, A3:{step:4,acc:'',midi:50,name:'D3'}, B3:{step:5,acc:'',midi:52,name:'E3'}, D4:{step:7,acc:'',midi:55,name:'G3'}}
+    notes: {
+      C3:{step:-1,acc:'',midi:41,name:'F2'}, D3:{step:0,acc:'',midi:43,name:'G2'}, E3:{step:1,acc:'',midi:45,name:'A2'},
+      F3:{step:2,acc:'',midi:46,name:'B♭2'}, G3:{step:3,acc:'',midi:48,name:'C3'}, A3:{step:4,acc:'',midi:50,name:'D3'},
+      B3:{step:5,acc:'',midi:52,name:'E3'}, C4:{step:6,acc:'',midi:53,name:'F3'}, D4:{step:7,acc:'',midi:55,name:'G3'},
+      E4:{step:8,acc:'',midi:57,name:'A3'}, F4:{step:9,acc:'',midi:58,name:'B♭3'}
+    }
   },
   A: {
     label: 'A', range: 'A2–A3',
     slide: 'A2 second, C3 sixth, E3 second, F♯3 fifth, A3 second',
     sig: [{glyph:'♯',x:78,y:129}],
-    notes: {D3:{step:1,acc:'',midi:45,name:'A2'}, F3:{step:3,acc:'',midi:48,name:'C3'}, A3:{step:5,acc:'',midi:52,name:'E3'}, B3:{step:6,acc:'',midi:54,name:'F♯3'}, D4:{step:8,acc:'',midi:57,name:'A3'}}
+    notes: {
+      C3:{step:0,acc:'',midi:43,name:'G2'}, D3:{step:1,acc:'',midi:45,name:'A2'}, E3:{step:2,acc:'',midi:47,name:'B2'},
+      F3:{step:3,acc:'',midi:48,name:'C3'}, G3:{step:4,acc:'',midi:50,name:'D3'}, A3:{step:5,acc:'',midi:52,name:'E3'},
+      B3:{step:6,acc:'',midi:54,name:'F♯3'}, C4:{step:7,acc:'',midi:55,name:'G3'}, D4:{step:8,acc:'',midi:57,name:'A3'},
+      E4:{step:9,acc:'',midi:59,name:'B3'}, F4:{step:10,acc:'',midi:60,name:'C4'}
+    }
   }
 };
-const pitchSteps = {D3:4, F3:6, A3:8, B3:9, D4:11};
+const pitchSteps = {C3:3, D3:4, E3:5, F3:6, G3:7, A3:8, B3:9, C4:10, D4:11, E4:12, F4:13};
 let songs = [], selected = 0, ctx, master, voices = [], animation;
 let playing = false, offset = 0, startTime = 0, currentNote = -1;
 let run = 0, plan, zoom = 100;
 const saved = (() => {try {return JSON.parse(localStorage.getItem('tromforce') || localStorage.getItem('ocarina-room') || '{}');} catch {return {};}})();
 let currentKey = (saved.key && KEYS[saved.key]) ? saved.key : 'D';
+let expandedMode = saved.mode === 'expanded';
 const safe = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+function getNoteInfo(k, pitch, defaultMidi = 60) {
+  if (k.notes && k.notes[pitch]) return k.notes[pitch];
+  const step = (pitchSteps && pitchSteps[pitch] !== undefined) ? pitchSteps[pitch] : 4;
+  return {step, acc: '', midi: defaultMidi, name: pitch};
+}
+
+function getActiveNotes(song) {
+  if (expandedMode && Array.isArray(song?.expandedNotes) && song.expandedNotes.length) {
+    return song.expandedNotes;
+  }
+  return song?.notes || [];
+}
+
 function persist() {
-  try {localStorage.setItem('tromforce', JSON.stringify({selected, zoom, key:currentKey, volume:$('volume').value, loop:$('loop').checked}));} catch {}
+  try {
+    localStorage.setItem('tromforce', JSON.stringify({
+      selected, zoom, key:currentKey, mode: expandedMode ? 'expanded' : 'brief', volume:$('volume').value, loop:$('loop').checked
+    }));
+  } catch {}
 }
 
 function updateKeyUI() {
@@ -64,13 +117,36 @@ function updateKeyUI() {
   if($('slide-guide')) $('slide-guide').textContent = `Slide guide: ${k.slide}. Adjust by ear.`;
 }
 
+function updateModeUI() {
+  if($('mode-select')) $('mode-select').value = expandedMode ? 'expanded' : 'brief';
+}
+
 function updateSongInfo(song) {
   const k = KEYS[currentKey] || KEYS.D;
+  const notes = getActiveNotes(song);
+  const barBeats = Number(song.meter.split('/')[0]);
+  const barCount = Math.round(notes.reduce((sum, n) => sum + n.beats, 0) / barBeats);
+  const modeLabel = expandedMode ? 'EXPANDED MELODY' : 'BRIEF CALL';
   $('title').textContent = song.title;
-  $('mood').textContent = `${song.mood} · ${song.meter} time · call ${selected+1} of ${songs.length}`;
-  $('category').textContent = `${selected<6?'THE OCARINA CALLS':'THE WARP CALLS'} · KEY OF ${k.label}`;
+  $('mood').textContent = `${song.mood} · ${song.meter} time · ${barCount} bars · call ${selected+1} of ${songs.length}`;
+  $('category').textContent = `${selected<6?'THE OCARINA CALLS':'THE WARP CALLS'} · ${modeLabel} · KEY OF ${k.label}`;
   $('tip').textContent = song.tip.replace(/\b(D3|F3|A3|B3|D4)\b/g, m => k.notes[m]?.name || m);
   $('dynamic').textContent = song.dynamic;
+}
+
+function changeMode(mode) {
+  const nextExpanded = mode === 'expanded';
+  if (nextExpanded === expandedMode) return;
+  expandedMode = nextExpanded;
+  const resume = playing;
+  reset();
+  updateModeUI();
+  if (songs[selected]) {
+    updateSongInfo(songs[selected]);
+    renderScore(songs[selected]);
+  }
+  persist();
+  if (resume) play();
 }
 
 function changeKey(key) {
@@ -89,60 +165,76 @@ function changeKey(key) {
 
 function renderScore(song) {
   const k = KEYS[currentKey] || KEYS.D;
+  const notesToRender = getActiveNotes(song);
   const barBeats = Number(song.meter.split('/')[0]);
-  const bars = [[], []];
-  let beat = 0, bar = 0;
-  song.notes.forEach((note,index) => {
-    bars[bar].push({...note,index});
+  const bars = [];
+  let beat = 0, currentBar = [];
+  notesToRender.forEach((note, index) => {
+    currentBar.push({...note, index});
     beat += note.beats;
-    if (Math.abs(beat-barBeats) < 0.001) {bar++; beat=0;}
+    if (Math.abs(beat - barBeats) < 0.001) {
+      bars.push(currentBar);
+      currentBar = [];
+      beat = 0;
+    }
   });
-  const viewBox=document.body.classList.contains('focus-mode')?'0 48 900 190':'0 0 900 260';
+  if (currentBar.length) bars.push(currentBar);
+
+  const barCount = Math.max(2, bars.length);
+  const barWidth = bars.length <= 2 ? 374 : (bars.length <= 4 ? 300 : 255);
+  const totalWidth = Math.max(900, 116 + bars.length * barWidth + 30);
+  const viewBox = document.body.classList.contains('focus-mode') ? `0 48 ${totalWidth} 190` : `0 0 ${totalWidth} 260`;
+
   const parts = [`<svg viewBox="${viewBox}" role="img" aria-labelledby="score-title score-desc">
-    <title id="score-title">${safe(song.title)} in bass clef (${k.label})</title>
-    <desc id="score-desc">${song.meter} time. Key of ${k.label}. ${song.notes.map(n=>`${k.notes[n.pitch]?.name||n.pitch}, ${n.beats} beats`).join('; ')}.</desc>
+    <title id="score-title">${safe(song.title)} in bass clef (${k.label}${expandedMode?' · expanded':''})</title>
+    <desc id="score-desc">${song.meter} time. Key of ${k.label}. ${notesToRender.map(n=>`${getNoteInfo(k,n.pitch,n.midi).name||n.pitch}, ${n.beats} beats`).join('; ')}.</desc>
     <g stroke="#263c30" fill="#263c30" stroke-width="1.2">`];
-  for(let i=0;i<5;i++) parts.push(`<path d="M25 ${160-i*12} H875"/>`);
+
+  for(let i=0;i<5;i++) parts.push(`<path d="M25 ${160-i*12} H${totalWidth-25}"/>`);
   parts.push(`<path d="M43 124 C36 112 61 106 62 123 C66 139 50 150 40 154" fill="none" stroke-width="3"/>
     <circle cx="44" cy="124" r="3.5"/><circle cx="72" cy="118" r="2"/><circle cx="72" cy="130" r="2"/>`);
+
   (k.sig || []).forEach(s => {
     parts.push(`<text x="${s.x}" y="${s.y}" font-size="${s.glyph==='♭'?21:18}" font-family="Georgia,serif" font-weight="bold" stroke="none" fill="#263c30">${s.glyph}</text>`);
   });
   const timeX = (k.sig && k.sig.length) ? (75 + k.sig.length * 10 + 10) : 94;
   parts.push(`<g font-family="Georgia,serif" font-size="23" stroke="none" text-anchor="middle"><text x="${timeX}" y="129">${barBeats}</text><text x="${timeX}" y="153">4</text></g>`);
-  bars.forEach((notes,bi) => {
-    const bx = 116+bi*374;
+
+  bars.forEach((notes, bi) => {
+    const bx = 116 + bi * barWidth;
     parts.push(`<text x="${bx}" y="64" font-size="11" font-family="system-ui" stroke="none" fill="#7a867a">${bi+1}</text>`);
-    const weights = notes.slice(0,-1).reduce((sum,n)=>sum+Math.sqrt(n.beats),0);
-    let used=0;
+    const weights = notes.slice(0, -1).reduce((sum, n) => sum + Math.sqrt(n.beats), 0);
+    const usableWidth = barWidth - 44;
+    let used = 0;
     notes.forEach(n => {
-      const x=bx+18+330*used/weights; used+=Math.sqrt(n.beats);
-      const noteInfo = k.notes[n.pitch] || {step: pitchSteps[n.pitch] || 4, acc: '', midi: n.midi};
-      const step=noteInfo.step, y=160-step*6;
+      const x = bx + 18 + (weights > 0 ? (usableWidth * used / weights) : (usableWidth / 2));
+      used += Math.sqrt(n.beats);
+      const noteInfo = getNoteInfo(k, n.pitch, n.midi);
+      const step = noteInfo.step, y = 160 - step * 6;
       parts.push(`<g class="note" data-index="${n.index}"><ellipse class="halo" cx="${x}" cy="${y}" rx="19" ry="15"/>`);
-      if(step>=10) {
-        for(let ledger=10;ledger<=step;ledger+=2) parts.push(`<path d="M${x-12} ${160-ledger*6} h24"/>`);
+      if(step >= 10) {
+        for(let ledger=10; ledger<=step; ledger+=2) parts.push(`<path d="M${x-12} ${160-ledger*6} h24"/>`);
       }
-      if(step<0) {
-        for(let ledger=-2;ledger>=step;ledger-=2) parts.push(`<path d="M${x-12} ${160-ledger*6} h24"/>`);
+      if(step < 0) {
+        for(let ledger=-2; ledger>=step; ledger-=2) parts.push(`<path d="M${x-12} ${160-ledger*6} h24"/>`);
       }
-      if(noteInfo.acc==='♭') {
+      if(noteInfo.acc === '♭') {
         parts.push(`<text x="${x-13}" y="${y+6}" font-size="20" font-family="Georgia,serif" font-weight="bold" stroke="none" fill="#263c30">♭</text>`);
-      } else if(noteInfo.acc==='♯') {
+      } else if(noteInfo.acc === '♯') {
         parts.push(`<text x="${x-13}" y="${y+5}" font-size="16" font-family="Georgia,serif" stroke="none" fill="#263c30">♯</text>`);
       }
-      parts.push(`<ellipse cx="${x}" cy="${y}" rx="7" ry="4.5" transform="rotate(-12 ${x} ${y})" ${n.beats===2?'fill="var(--paper)" stroke-width="1.7"':''}/>
+      parts.push(`<ellipse cx="${x}" cy="${y}" rx="7" ry="4.5" transform="rotate(-12 ${x} ${y})" ${n.beats>=2?'fill="var(--paper)" stroke-width="1.7"':''}/>
         <path d="M${x-6} ${y+1} v43" stroke-width="1.5"/>`);
-      if(n.beats===.5) parts.push(`<path d="M${x-6} ${y+44} C${x-24} ${y+37} ${x-21} ${y+28} ${x-12} ${y+20}" stroke-width="2" fill="none"/>`);
-      if(n.beats===1.5) parts.push(`<circle cx="${x+14}" cy="${y-(step%2===0?6:0)}" r="1.8"/>`);
+      if(n.beats === 0.5) parts.push(`<path d="M${x-6} ${y+44} C${x-24} ${y+37} ${x-21} ${y+28} ${x-12} ${y+20}" stroke-width="2" fill="none"/>`);
+      if(n.beats === 1.5) parts.push(`<circle cx="${x+14}" cy="${y-(step%2===0?6:0)}" r="1.8"/>`);
       parts.push('</g>');
     });
-    const boundary=116+(bi+1)*374;
+    const boundary = 116 + (bi + 1) * barWidth;
     parts.push(`<path d="M${boundary} 112 V160"/>`);
   });
-  parts.push('<path d="M870 112 V160" stroke-width="3"/></g></svg>');
-  $('score').innerHTML=parts.join('');
-  currentNote=-1;
+  parts.push(`<path d="M${totalWidth-30} 112 V160"/><path d="M${totalWidth-24} 112 V160" stroke-width="3"/></g></svg>`);
+  $('score').innerHTML = parts.join('');
+  currentNote = -1;
 }
 
 function highlight(index) {
@@ -192,7 +284,8 @@ async function play() {
     await ctx.resume();
     if(token!==run) return;
     master.gain.value=Number($('volume').value)/100*.22;
-    plan=timeline(songs[selected],Number($('tempo').value));
+    const activeSong = {...songs[selected], notes: getActiveNotes(songs[selected])};
+    plan=timeline(activeSong,Number($('tempo').value));
     if(offset>=plan.duration) offset=0;
     playing=true; $('error').hidden=true; $('play').textContent='Ⅱ Pause';
     startTime=ctx.currentTime+.05-offset;
@@ -217,7 +310,7 @@ function schedule(from) {
     const real=new Float32Array(9), imag=new Float32Array(9);
     for(let h=1;h<=8;h++) imag[h]=1/Math.pow(h,1.5);
     osc.setPeriodicWave(ctx.createPeriodicWave(real,imag));
-    const noteInfo=k.notes[note.pitch] || {midi:note.midi};
+    const noteInfo=getNoteInfo(k, note.pitch, note.midi);
     osc.frequency.value=440*2**((noteInfo.midi-69)/12);
     osc.connect(gain); osc.start(at); osc.stop(at+duration);
     osc.onended=()=>gain.disconnect(); voices.push(osc);
@@ -278,6 +371,10 @@ $('volume').addEventListener('input',()=>{
   persist();
 });
 $('loop').addEventListener('change',persist);
+if($('mode-select')) {
+  $('mode-select').addEventListener('change',()=>changeMode($('mode-select').value));
+  $('mode-select').addEventListener('input',()=>changeMode($('mode-select').value));
+}
 if($('key-select')) {
   $('key-select').addEventListener('change',()=>changeKey($('key-select').value));
   $('key-select').addEventListener('input',()=>changeKey($('key-select').value));
@@ -307,6 +404,7 @@ async function init() {
     $('volume').value=saved.volume??60; $('volume').dispatchEvent(new Event('input'));
     $('loop').checked=Boolean(saved.loop);
     updateKeyUI();
+    updateModeUI();
     choose(Number.isInteger(saved.selected) && saved.selected>=0 && saved.selected<songs.length?saved.selected:0);
     for(const id of ['play','stop','previous','next','tempo','original-tempo']) $(id).disabled=false;
   } catch(error) {
