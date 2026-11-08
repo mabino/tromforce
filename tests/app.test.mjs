@@ -80,11 +80,14 @@ test('fullscreen falls back to a focused readable layout',async()=>{
   assert.equal(app.document.body.classList.contains('focus-mode'),false);
 });
 
-test('changing key to Bb adjusts note frequencies and range',async()=>{
+test('changing key to Bb adjusts note frequencies, range, signature, and tips',async()=>{
   const app=await harness();
   app.get('key-select').value='Bb';
   app.get('key-select').dispatchEvent({type:'change'});
   assert.equal(app.get('clef-range').textContent,'B♭2–B♭3');
+  assert.equal(app.get('category').textContent,'THE OCARINA CALLS · KEY OF B♭');
+  assert.ok(app.get('tip').textContent.includes('B♭3'));
+  assert.ok(app.get('score').innerHTML.includes('♭'));
   await app.get('play').dispatchEvent({type:'click'});
   assert.ok(Math.abs(app.oscillators[0].frequency.value-195.9977)<0.01);
 });

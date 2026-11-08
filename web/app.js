@@ -5,37 +5,44 @@ const KEYS = {
   D: {
     label: 'D', range: 'D3–D4',
     slide: 'D3 fourth, F3 first, A3 second, B3 fourth, D4 first',
-    notes: {D3:{step:4,acc:'',midi:50}, F3:{step:6,acc:'',midi:53}, A3:{step:8,acc:'',midi:57}, B3:{step:9,acc:'',midi:59}, D4:{step:11,acc:'',midi:62}}
+    sig: [],
+    notes: {D3:{step:4,acc:'',midi:50,name:'D3'}, F3:{step:6,acc:'',midi:53,name:'F3'}, A3:{step:8,acc:'',midi:57,name:'A3'}, B3:{step:9,acc:'',midi:59,name:'B3'}, D4:{step:11,acc:'',midi:62,name:'D4'}}
   },
   Bb: {
     label: 'B♭', range: 'B♭2–B♭3',
     slide: 'B♭2 first, D♭3 fifth, F3 first, G3 fourth, B♭3 first',
-    notes: {D3:{step:2,acc:'♭',midi:46}, F3:{step:4,acc:'♭',midi:49}, A3:{step:6,acc:'',midi:53}, B3:{step:7,acc:'',midi:55}, D4:{step:9,acc:'♭',midi:58}}
+    sig: [{glyph:'♭',x:78,y:153},{glyph:'♭',x:88,y:135}],
+    notes: {D3:{step:2,acc:'',midi:46,name:'B♭2'}, F3:{step:4,acc:'♭',midi:49,name:'D♭3'}, A3:{step:6,acc:'',midi:53,name:'F3'}, B3:{step:7,acc:'',midi:55,name:'G3'}, D4:{step:9,acc:'',midi:58,name:'B♭3'}}
   },
   C: {
     label: 'C', range: 'C3–C4',
     slide: 'C3 sixth, E♭3 third, G3 fourth, A3 second, C4 third',
-    notes: {D3:{step:3,acc:'',midi:48}, F3:{step:5,acc:'♭',midi:51}, A3:{step:7,acc:'',midi:55}, B3:{step:8,acc:'',midi:57}, D4:{step:10,acc:'',midi:60}}
+    sig: [{glyph:'♭',x:78,y:153},{glyph:'♭',x:88,y:135}],
+    notes: {D3:{step:3,acc:'',midi:48,name:'C3'}, F3:{step:5,acc:'',midi:51,name:'E♭3'}, A3:{step:7,acc:'',midi:55,name:'G3'}, B3:{step:8,acc:'',midi:57,name:'A3'}, D4:{step:10,acc:'',midi:60,name:'C4'}}
   },
   Eb: {
     label: 'E♭', range: 'E♭3–E♭4',
     slide: 'E♭3 third, G♭3 fifth, B♭3 first, C4 third, E♭4 third',
-    notes: {D3:{step:5,acc:'♭',midi:51}, F3:{step:7,acc:'♭',midi:54}, A3:{step:9,acc:'♭',midi:58}, B3:{step:10,acc:'',midi:60}, D4:{step:12,acc:'♭',midi:63}}
+    sig: [{glyph:'♭',x:77,y:153},{glyph:'♭',x:86,y:135},{glyph:'♭',x:95,y:117}],
+    notes: {D3:{step:5,acc:'',midi:51,name:'E♭3'}, F3:{step:7,acc:'♭',midi:54,name:'G♭3'}, A3:{step:9,acc:'',midi:58,name:'B♭3'}, B3:{step:10,acc:'',midi:60,name:'C4'}, D4:{step:12,acc:'',midi:63,name:'E♭4'}}
   },
   F: {
     label: 'F', range: 'F2–F3',
     slide: 'F2 first, A♭2 third, C3 sixth, D3 fourth, F3 first',
-    notes: {D3:{step:-1,acc:'',midi:41}, F3:{step:1,acc:'♭',midi:44}, A3:{step:3,acc:'',midi:48}, B3:{step:4,acc:'',midi:50}, D4:{step:6,acc:'',midi:53}}
+    sig: [{glyph:'♭',x:78,y:153}],
+    notes: {D3:{step:-1,acc:'',midi:41,name:'F2'}, F3:{step:1,acc:'♭',midi:44,name:'A♭2'}, A3:{step:3,acc:'',midi:48,name:'C3'}, B3:{step:4,acc:'',midi:50,name:'D3'}, D4:{step:6,acc:'',midi:53,name:'F3'}}
   },
   G: {
     label: 'G', range: 'G2–G3',
     slide: 'G2 fourth, B♭2 first, D3 fourth, E3 second, G3 fourth',
-    notes: {D3:{step:0,acc:'',midi:43}, F3:{step:2,acc:'♭',midi:46}, A3:{step:4,acc:'',midi:50}, B3:{step:5,acc:'',midi:52}, D4:{step:7,acc:'',midi:55}}
+    sig: [{glyph:'♭',x:78,y:153}],
+    notes: {D3:{step:0,acc:'',midi:43,name:'G2'}, F3:{step:2,acc:'',midi:46,name:'B♭2'}, A3:{step:4,acc:'',midi:50,name:'D3'}, B3:{step:5,acc:'',midi:52,name:'E3'}, D4:{step:7,acc:'',midi:55,name:'G3'}}
   },
   A: {
     label: 'A', range: 'A2–A3',
     slide: 'A2 second, C3 sixth, E3 second, F♯3 fifth, A3 second',
-    notes: {D3:{step:1,acc:'',midi:45}, F3:{step:3,acc:'',midi:48}, A3:{step:5,acc:'',midi:52}, B3:{step:6,acc:'♯',midi:54}, D4:{step:8,acc:'',midi:57}}
+    sig: [{glyph:'♯',x:78,y:129}],
+    notes: {D3:{step:1,acc:'',midi:45,name:'A2'}, F3:{step:3,acc:'',midi:48,name:'C3'}, A3:{step:5,acc:'',midi:52,name:'E3'}, B3:{step:6,acc:'',midi:54,name:'F♯3'}, D4:{step:8,acc:'',midi:57,name:'A3'}}
   }
 };
 const pitchSteps = {D3:4, F3:6, A3:8, B3:9, D4:11};
@@ -57,13 +64,25 @@ function updateKeyUI() {
   if($('slide-guide')) $('slide-guide').textContent = `Slide guide: ${k.slide}. Adjust by ear.`;
 }
 
+function updateSongInfo(song) {
+  const k = KEYS[currentKey] || KEYS.D;
+  $('title').textContent = song.title;
+  $('mood').textContent = `${song.mood} · ${song.meter} time · call ${selected+1} of ${songs.length}`;
+  $('category').textContent = `${selected<6?'THE OCARINA CALLS':'THE WARP CALLS'} · KEY OF ${k.label}`;
+  $('tip').textContent = song.tip.replace(/\b(D3|F3|A3|B3|D4)\b/g, m => k.notes[m]?.name || m);
+  $('dynamic').textContent = song.dynamic;
+}
+
 function changeKey(key) {
   if(!KEYS[key] || key === currentKey) return;
   currentKey = key;
   const resume = playing;
   reset();
   updateKeyUI();
-  if(songs[selected]) renderScore(songs[selected]);
+  if(songs[selected]) {
+    updateSongInfo(songs[selected]);
+    renderScore(songs[selected]);
+  }
   persist();
   if(resume) play();
 }
@@ -81,12 +100,16 @@ function renderScore(song) {
   const viewBox=document.body.classList.contains('focus-mode')?'0 48 900 190':'0 0 900 260';
   const parts = [`<svg viewBox="${viewBox}" role="img" aria-labelledby="score-title score-desc">
     <title id="score-title">${safe(song.title)} in bass clef (${k.label})</title>
-    <desc id="score-desc">${song.meter} time. ${song.notes.map(n=>`${n.pitch}, ${n.beats} beats`).join('; ')}.</desc>
+    <desc id="score-desc">${song.meter} time. Key of ${k.label}. ${song.notes.map(n=>`${k.notes[n.pitch]?.name||n.pitch}, ${n.beats} beats`).join('; ')}.</desc>
     <g stroke="#263c30" fill="#263c30" stroke-width="1.2">`];
   for(let i=0;i<5;i++) parts.push(`<path d="M25 ${160-i*12} H875"/>`);
   parts.push(`<path d="M43 124 C36 112 61 106 62 123 C66 139 50 150 40 154" fill="none" stroke-width="3"/>
-    <circle cx="44" cy="124" r="3.5"/><circle cx="72" cy="118" r="2"/><circle cx="72" cy="130" r="2"/>
-    <g font-family="Georgia,serif" font-size="23" stroke="none" text-anchor="middle"><text x="94" y="129">${barBeats}</text><text x="94" y="153">4</text></g>`);
+    <circle cx="44" cy="124" r="3.5"/><circle cx="72" cy="118" r="2"/><circle cx="72" cy="130" r="2"/>`);
+  (k.sig || []).forEach(s => {
+    parts.push(`<text x="${s.x}" y="${s.y}" font-size="${s.glyph==='♭'?21:18}" font-family="Georgia,serif" font-weight="bold" stroke="none" fill="#263c30">${s.glyph}</text>`);
+  });
+  const timeX = (k.sig && k.sig.length) ? (75 + k.sig.length * 10 + 10) : 94;
+  parts.push(`<g font-family="Georgia,serif" font-size="23" stroke="none" text-anchor="middle"><text x="${timeX}" y="129">${barBeats}</text><text x="${timeX}" y="153">4</text></g>`);
   bars.forEach((notes,bi) => {
     const bx = 116+bi*374;
     parts.push(`<text x="${bx}" y="64" font-size="11" font-family="system-ui" stroke="none" fill="#7a867a">${bi+1}</text>`);
@@ -147,10 +170,7 @@ function reset() {
 function choose(index) {
   reset(); selected=((index%songs.length)+songs.length)%songs.length;
   const song=songs[selected];
-  $('title').textContent=song.title;
-  $('mood').textContent=`${song.mood} · ${song.meter} time · call ${selected+1} of ${songs.length}`;
-  $('category').textContent=selected<6?'THE OCARINA CALLS · SOLO TROMBONE':'THE WARP CALLS · SOLO TROMBONE';
-  $('tip').textContent=song.tip; $('dynamic').textContent=song.dynamic;
+  updateSongInfo(song);
   $('tempo').value=song.tempo; $('tempo-value').textContent=`${song.tempo} BPM`;
   $('wav').href=`assets/${song.audio}`; $('xml').href=`assets/${song.score}`;
   $('songs').querySelectorAll('button').forEach((button,i)=>button.setAttribute('aria-current',String(i===selected)));
@@ -258,7 +278,10 @@ $('volume').addEventListener('input',()=>{
   persist();
 });
 $('loop').addEventListener('change',persist);
-if($('key-select')) $('key-select').addEventListener('change',()=>changeKey($('key-select').value));
+if($('key-select')) {
+  $('key-select').addEventListener('change',()=>changeKey($('key-select').value));
+  $('key-select').addEventListener('input',()=>changeKey($('key-select').value));
+}
 document.addEventListener('keydown',event=>{
   if(['INPUT','TEXTAREA','SELECT','BUTTON','A','SUMMARY'].includes(event.target.tagName) || event.ctrlKey || event.metaKey || event.altKey) return;
   if(event.code==='Space' && songs.length) {event.preventDefault(); play();}
