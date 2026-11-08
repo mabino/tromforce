@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163b32">
+  <title>Tromforce · Ocarina of Time for trombone</title>
+  <link rel="icon" href="ocarina-seal.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./"><span class="crest" aria-hidden="true"><svg viewBox="0 0 60 54"><path d="M30 2 16 26h28ZM16 26 2 50h28ZM44 26 30 50h28Z" fill="currentColor"/></svg></span><span>TROMFORCE<small>A songbook of the Hero of Time</small></span></a>
+  <div class="header-actions"><a href="assets/ocarina_trombone.pdf" target="_blank" rel="noopener">PDF booklet ↗</a><button id="fullscreen" type="button" aria-pressed="false">⛶ Full screen</button></div>
+</header>
+<div class="layout">
+  <aside class="library" aria-label="Song library">
+    <img class="relic" src="ocarina-seal.svg" alt="" width="180" height="180">
+    <p class="eyebrow">THE LEGEND OF ZELDA</p><h1>Ocarina<br>of Time</h1>
+    <div class="ornament" aria-hidden="true"><span>◇</span></div>
+    <nav id="songs" aria-label="Choose a song"></nav>
+    <a class="folded" href="assets/ocarina_trombone_folded.pdf" download>Download folding booklet ↓</a>
+  </aside>
+  <main id="practice" aria-label="Practice player">
+    <div class="piece-header"><div><p id="category" class="eyebrow">SOLO TROMBONE · CONCERT PITCH</p><h2 id="title">Loading the songbook…</h2><p id="mood"></p></div>
+      <div class="navigation"><button id="previous" aria-label="Previous song" disabled>←</button><button id="next" aria-label="Next song" disabled>→</button></div>
+    </div>
+    <div class="score-toolbar"><span>Bass clef <span class="dot">·</span> D3–D4</span><label for="zoom">Score size <input id="zoom" type="range" min="85" max="170" step="5" value="100"><output id="zoom-value">100%</output></label></div>
+    <section class="sheet" aria-label="Musical score"><div id="score-scroll" tabindex="0" aria-label="Score; scroll horizontally at larger sizes"><div id="score"></div></div><p class="score-caption"><span id="dynamic"></span> <span id="tip"></span></p></section>
+    <section class="transport" aria-label="Playback controls">
+      <div class="play-row"><button id="play" class="primary" disabled>▶ Play call</button><button id="stop" disabled>■ Reset</button><label class="loop"><input id="loop" type="checkbox"> Loop</label><span id="status" role="status" aria-live="polite">Loading…</span></div>
+      <label class="progress-label" for="progress">Call progress</label><progress id="progress" value="0" max="1"></progress>
+      <div class="settings"><label for="tempo">Tempo <output id="tempo-value"></output><input id="tempo" type="range" min="40" max="180" value="80" disabled></label><button id="original-tempo" disabled>Original practice tempo</button><label for="volume">Volume <output id="volume-value">60%</output><input id="volume" type="range" min="0" max="100" value="60"></label></div>
+      <p class="hint">Space: play / pause <span>← →: change call</span> <span>F: full screen</span></p>
+    </section>
+    <details class="notes"><summary>Playing notes & downloads</summary><p>B-flat tenor trombone, read at concert pitch. B is B-natural; C4 is middle C. Slide guide: D3 fourth, F3 first, A3 second, B3 fourth, D4 first. Adjust by ear.</p><p>These short input calls use editorial rhythms and tempos, rather than exact soundtrack timing. The sound is synthesized brass, not a real trombone recording. Changing tempo restarts playback. In loop mode, one silent bar separates each call for breathing.</p><div class="downloads"><a id="wav" download>Download this WAV</a><a id="xml" download>Editable score</a><a href="assets/ocarina_audio_examples.zip" download>All audio examples</a></div></details>
+    <footer><span class="footer-mark" aria-hidden="true">△</span><p>The Legend of Zelda and Ocarina of Time, including their names, characters and associated game materials, are © Nintendo. Original game music composed by Koji Kondo. All rights reserved by Nintendo and the respective rights holders.</p><p>This is an unofficial, non-commercial fan work. It is not affiliated with, sponsored by, endorsed by or otherwise connected to Nintendo or any other rights holder. No ownership of the original game, music or trademarks is claimed.</p></footer>
+    <p id="error" role="alert" hidden></p>
+  </main>
+</div>
+</body></html>

@@ -1,0 +1,7 @@
+*
+!Dockerfile
+!generate_booklet.py
+!generate_audio.py
+!build_web.py
+!web/
+!web/**
