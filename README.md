@@ -2,7 +2,7 @@
 
 A non-commercial, Zelda-inspired trombone practice app and printable songbook. Select a call, read the notation, and hear a synthesized example with adjustable tempo and note highlighting. Includes a fullscreen music stand view with spacing that adapts to the display.
 
-Source repository: [mabino/trombforce](https://github.com/mabino/trombforce).
+Source repository: [mabino/tromforce](https://github.com/mabino/tromforce).
 
 Twelve short ocarina input melodies, arranged in concert-pitch bass clef for solo B-flat tenor trombone. Range D3–D4, B-natural throughout. These are the familiar fixed calls, not the extended soundtrack pieces. Original music by Koji Kondo; game and music rights belong to their respective owners, including Nintendo. Unofficial fan arrangement.
 
@@ -11,8 +11,8 @@ Twelve short ocarina input melodies, arranged in concert-pitch bass clef for sol
 Clone the project and start the app:
 
 ```sh
-git clone https://github.com/mabino/trombforce.git
-cd trombforce
+git clone https://github.com/mabino/tromforce.git
+cd tromforce
 docker compose up --build -d
 ```
 
